@@ -7,18 +7,24 @@ import java.io.Serializable;
  */
 public interface IResultCode extends Serializable {
 
-	/**
-	 * 消息
-	 *
-	 * @return String
-	 */
-	String getMsg();
+    /**
+     * 状态码
+     *
+     * @return int
+     */
+    int getCode();
 
-	/**
-	 * 状态码
-	 *
-	 * @return int
-	 */
-	int getCode();
+    /**
+     * 消息
+     *
+     * @return String
+     */
+    String getMsg();
 
+    /**
+     * 消息描述
+     */
+    default String getErrorDescription() {
+        return null;
+    }
 }

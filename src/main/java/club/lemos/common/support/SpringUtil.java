@@ -6,10 +6,6 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 import org.springframework.context.ApplicationEvent;
 import org.springframework.lang.NonNull;
-import org.springframework.web.context.request.RequestContextHolder;
-import org.springframework.web.context.request.ServletRequestAttributes;
-
-import javax.servlet.http.HttpServletRequest;
 
 public class SpringUtil implements ApplicationContextAware, DisposableBean {
 
@@ -56,11 +52,4 @@ public class SpringUtil implements ApplicationContextAware, DisposableBean {
         context.publishEvent(event);
     }
 
-    public static HttpServletRequest getCurrentRequest() throws IllegalStateException {
-        ServletRequestAttributes attrs = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
-        if (attrs == null) {
-            throw new IllegalStateException("当前线程中不存在 Request 上下文");
-        }
-        return attrs.getRequest();
-    }
 }

@@ -1,5 +1,6 @@
 package club.lemos.common.utils;
 
+import club.lemos.common.support.BaseBeanCopier;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.BeanWrapper;
 import org.springframework.beans.BeanWrapperImpl;
@@ -20,6 +21,20 @@ public class BeanUtil extends BeanUtils {
         T to = instantiateClass(clazz);
         copyProperties(source, to);
         return to;
+    }
+
+    /**
+     * 拷贝对象
+     *
+     * 注意：不支持链式Bean，链式用 copyProperties
+     *
+     * @param source 源对象
+     * @param targetBean 需要赋值的对象
+     */
+    public static void deepCopy(Object source, Object targetBean) {
+        BaseBeanCopier copier = BaseBeanCopier
+                .create(source.getClass(), targetBean.getClass(), false);
+        copier.copy(source, targetBean, null);
     }
 
     /**

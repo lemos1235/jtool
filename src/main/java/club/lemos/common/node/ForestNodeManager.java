@@ -16,7 +16,7 @@ public class ForestNodeManager<T extends INode> {
 	/**
 	 * 森林的父节点ID
 	 */
-	private final List<Integer> parentIds = new ArrayList<>();
+	private final List<Long> parentIds = new ArrayList<>();
 
 	public ForestNodeManager(List<T> items) {
 		list = items;
@@ -28,7 +28,7 @@ public class ForestNodeManager<T extends INode> {
 	 * @param id 节点ID
 	 * @return 对应的节点对象
 	 */
-	public INode getTreeNodeAT(int id) {
+	public INode getTreeNodeAT(long id) {
 		for (INode forestNode : list) {
 			if (forestNode.getId() == id) {
 				return forestNode;
@@ -42,7 +42,7 @@ public class ForestNodeManager<T extends INode> {
 	 *
 	 * @param parentId 父节点ID
 	 */
-	public void addParentId(Integer parentId) {
+	public void addParentId(long parentId) {
 		parentIds.add(parentId);
 	}
 

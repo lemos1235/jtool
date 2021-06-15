@@ -8,16 +8,16 @@ public interface INode {
 	/**
 	 * 主键
 	 *
-	 * @return Integer
+	 * @return Long
 	 */
-	Integer getId();
+	Long getId();
 
 	/**
 	 * 父主键
 	 *
-	 * @return Integer
+	 * @return Long
 	 */
-	Integer getParentId();
+	Long getParentId();
 
 	/**
 	 * 子孙节点

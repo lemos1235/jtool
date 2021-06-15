@@ -20,7 +20,6 @@ public interface CommonConstant {
      * 开发环境相关
      */
     String DEV_CODE = "dev";
-    String HOME_CODE = "home";
     String PROD_CODE = "prod";
     String TEST_CODE = "test";
 
@@ -45,6 +44,7 @@ public interface CommonConstant {
     String DB_CREATE_TIME_FIELD_NAME ="createTime";
     String DB_UPDATE_TIME_FIELD_NAME ="updateTime";
     String DB_IS_DELETED_FIELD_NAME ="isDeleted";
+    String DB_ENABLED_FIELD_NAME ="enabled";
     String DATETIME_MIN ="1000-01-01T00:00:00";
     String DATETIME_MAX ="9999-12-31T23:59:59";
 
@@ -52,6 +52,7 @@ public interface CommonConstant {
     String DB_CREATE_TIME_COLUMN_NAME ="create_time";
     String DB_UPDATE_USER_COLUMN_NAME ="update_user";
     String DB_UPDATE_TIME_COLUMN_NAME ="update_time";
+    String DB_IS_DELETED_COLUMN_NAME ="is_deleted";
     String DB_ENABLED_COLUMN_NAME ="enabled";
 
     String DB_TENANT_ID = "tenant_id";

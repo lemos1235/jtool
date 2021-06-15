@@ -6,7 +6,7 @@
 
     <groupId>club.lemos</groupId>
     <artifactId>jtool</artifactId>
-    <version>1.0.0-RC1</version>
+    <version>1.1.0</version>
     <packaging>jar</packaging>
     <name>jtool</name>
 
@@ -36,10 +36,9 @@
         <maven.compiler.source>${java.version}</maven.compiler.source>
         <maven.compiler.target>${java.version}</maven.compiler.target>
         <encoding>UTF-8</encoding>
-        <spring.boot.version>2.3.2.RELEASE</spring.boot.version>
-        <lombok.version>1.18.12</lombok.version>
-        <commons-text.version>1.9</commons-text.version>
-        <mybatis-plus.version>3.3.2</mybatis-plus.version>
+        <spring.boot.version>2.5.1</spring.boot.version>
+        <lombok.version>1.18.20</lombok.version>
+        <mybatis-plus.version>3.4.3</mybatis-plus.version>
         <swagger.version>3.0.0</swagger.version>
         <maven.compiler.version>3.8.0</maven.compiler.version>
         <maven.surefire.version>2.22.1</maven.surefire.version>
@@ -69,11 +68,6 @@
     </build>
 
     <dependencies>
-        <dependency>
-            <groupId>org.apache.commons</groupId>
-            <artifactId>commons-text</artifactId>
-            <version>${commons-text.version}</version>
-        </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter</artifactId>

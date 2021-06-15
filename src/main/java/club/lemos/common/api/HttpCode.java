@@ -6,11 +6,11 @@ import lombok.Getter;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * 业务代码枚举
+ * 一般型错误码
  */
 @Getter
 @AllArgsConstructor
-public enum ResultCode implements IResultCode {
+public enum HttpCode implements IResultCode {
 
 	/**
 	 * 操作成功

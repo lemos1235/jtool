@@ -1,6 +1,10 @@
 package club.lemos.common.api;
 
+import lombok.Data;
+import lombok.EqualsAndHashCode;
 
+@EqualsAndHashCode(callSuper = true)
+@Data
 public class ApiException extends RuntimeException {
 
     /**
@@ -11,27 +15,41 @@ public class ApiException extends RuntimeException {
     /**
      * 错误码
      */
-    private IErrorCode errorCode;
+    private int code = 400;
 
-    public ApiException(IErrorCode errorCode) {
-        super(errorCode.getMsg());
-        this.errorCode = errorCode;
+    private String msg = "";
+
+    private String errorDescription;
+
+    /**
+     * @deprecated 请使用 ApiException(IResultCode resultCode)
+     *
+     * @param msg 错误信息
+     */
+    @Deprecated
+    public ApiException(String msg) {
+        super(msg);
+        this.msg = msg;
     }
 
-    public ApiException(String message) {
-        super(message);
+    public ApiException(int code, String msg) {
+        super(msg);
+        this.code = code;
+        this.msg = msg;
     }
 
-    public ApiException(Throwable cause) {
-        super(cause);
+    public ApiException(IResultCode resultCode) {
+        super(resultCode.getMsg());
+        this.code = resultCode.getCode();
+        this.msg = resultCode.getMsg();
+        this.errorDescription = resultCode.getErrorDescription();
     }
 
-    public ApiException(String message, Throwable cause) {
-        super(message, cause);
-    }
-
-    public IErrorCode getErrorCode() {
-        return errorCode;
+    public ApiException(R<?> result) {
+        super(result.getMsg());
+        this.code = result.getCode();
+        this.msg = result.getMsg();
+        this.errorDescription = result.getErrorDescription();
     }
 }
 

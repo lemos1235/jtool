@@ -217,7 +217,7 @@ public class StringUtil extends org.springframework.util.StringUtils {
      * @return 切掉后的字符串，若前缀不是 preffix， 返回原字符串
      */
     public static String removePrefix(CharSequence str, CharSequence prefix) {
-        if (isEmpty(str) || isEmpty(prefix)) {
+        if (hasLength(str) || hasLength(prefix)) {
             return StringPool.EMPTY;
         }
         final String str2 = str.toString();
@@ -235,7 +235,7 @@ public class StringUtil extends org.springframework.util.StringUtils {
      * @return 切掉后的字符串，若前缀不是 prefix， 返回原字符串
      */
     public static String removePrefixIgnoreCase(CharSequence str, CharSequence prefix) {
-        if (isEmpty(str) || isEmpty(prefix)) {
+        if (hasLength(str) || hasLength(prefix)) {
             return StringPool.EMPTY;
         }
         final String str2 = str.toString();
@@ -253,7 +253,7 @@ public class StringUtil extends org.springframework.util.StringUtils {
      * @return 切掉后的字符串，若后缀不是 suffix， 返回原字符串
      */
     public static String removeSuffix(CharSequence str, CharSequence suffix) {
-        if (isEmpty(str) || isEmpty(suffix)) {
+        if (hasLength(str) || hasLength(suffix)) {
             return "";
         }
         final String str2 = str.toString();
@@ -271,7 +271,7 @@ public class StringUtil extends org.springframework.util.StringUtils {
      * @return 切割后后剩余的后半部分字符串
      */
     public static String subSuf(CharSequence string, int fromIndex) {
-        if (isEmpty(string)) {
+        if (hasLength(string)) {
             return null;
         }
         return sub(string, fromIndex, string.length());
@@ -317,7 +317,7 @@ public class StringUtil extends org.springframework.util.StringUtils {
      * @return 字串
      */
     public static String sub(CharSequence str, int fromIndex, int toIndex) {
-        if (isEmpty(str)) {
+        if (hasLength(str)) {
             return "";
         }
         int len = str.length();
@@ -358,6 +358,9 @@ public class StringUtil extends org.springframework.util.StringUtils {
     }
 
     public static List<Long> idsToList(String ids, String separator) {
+        if (StringUtil.isBlank(ids)) {
+            return null;
+        }
         return Arrays.stream(ids.split(separator))
                 .map(Long::parseLong).collect(Collectors.toList());
     }

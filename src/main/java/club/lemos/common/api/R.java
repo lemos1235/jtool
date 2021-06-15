@@ -1,5 +1,7 @@
 package club.lemos.common.api;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -26,12 +28,20 @@ public class R<T> implements Serializable {
     private static final String DEFAULT_NULL_MESSAGE = "暂无承载数据!";
 
     private int code;
+
     private boolean success;
+
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     private T data;
+
     private String msg;
 
+    @JsonProperty("error_description")
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    private String errorDescription;
+
     private R(IResultCode resultCode) {
-        this(resultCode, null, resultCode.getMsg());
+        this(resultCode.getCode(), null, resultCode.getMsg(), resultCode.getErrorDescription());
     }
 
     private R(IResultCode resultCode, String msg) {
@@ -50,7 +60,12 @@ public class R<T> implements Serializable {
         this.code = code;
         this.data = data;
         this.msg = msg;
-        this.success = ResultCode.SUCCESS.code == code;
+        this.success = HttpCode.SUCCESS.code == code;
+    }
+
+    private R(int code, T data, String msg, String errorDescription) {
+        this(code, data, msg);
+        this.errorDescription = errorDescription;
     }
 
     /**
@@ -61,7 +76,7 @@ public class R<T> implements Serializable {
      */
     public static boolean isSuccess(@Nullable R<?> result) {
         return Optional.ofNullable(result)
-                .map(x -> ObjectUtils.nullSafeEquals(ResultCode.SUCCESS.code, x.code))
+                .map(x -> ObjectUtils.nullSafeEquals(HttpCode.SUCCESS.code, x.code))
                 .orElse(Boolean.FALSE);
     }
 
@@ -119,7 +134,7 @@ public class R<T> implements Serializable {
      * @return R
      */
     public static <T> R<T> success(String msg) {
-        return new R<>(ResultCode.SUCCESS, msg);
+        return new R<>(HttpCode.SUCCESS, msg);
     }
 
     /**
@@ -153,7 +168,7 @@ public class R<T> implements Serializable {
      * @return R
      */
     public static <T> R<T> fail(String msg) {
-        return new R<>(ResultCode.FAILURE, msg);
+        return new R<>(HttpCode.FAILURE, msg);
     }
 
 
@@ -167,6 +182,11 @@ public class R<T> implements Serializable {
      */
     public static <T> R<T> fail(int code, String msg) {
         return new R<>(code, null, msg);
+    }
+
+
+    public static <T> R<T> fail(int code, String msg, String error_description) {
+        return new R<>(code, null, msg, error_description);
     }
 
     /**
@@ -190,6 +210,19 @@ public class R<T> implements Serializable {
      */
     public static <T> R<T> fail(IResultCode resultCode, String msg) {
         return new R<>(resultCode, msg);
+    }
+
+
+    /**
+     * 返回R
+     *
+     * @param resultCode 业务代码
+     * @param data       数据
+     * @param <T>        T 泛型标记
+     * @return R
+     */
+    public static <T> R<T> fail(IResultCode resultCode, T data) {
+        return new R<>(resultCode, data);
     }
 
     /**

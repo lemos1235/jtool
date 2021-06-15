@@ -1,17 +1,22 @@
 package club.lemos.common.jackson;
 
-import club.lemos.common.utils.StringPool;
-import club.lemos.common.utils.StringUtil;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.core.JsonParser;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
+import com.fasterxml.jackson.databind.module.SimpleModule;
+import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
+import club.lemos.common.utils.StringPool;
+import club.lemos.common.utils.StringUtil;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -23,10 +28,9 @@ public class JsonUtil {
     public static <T> String toJson(T value) {
         try {
             return getInstance().writeValueAsString(value);
-        } catch (Exception e) {
-            log.error(e.getMessage(), e);
+        } catch (JsonProcessingException e) {
+            throw new RuntimeException(e);
         }
-        return null;
     }
 
     @SneakyThrows
@@ -37,10 +41,9 @@ public class JsonUtil {
     public static <T> T parse(String content, Class<T> valueType) {
         try {
             return getInstance().readValue(content, valueType);
-        } catch (Exception e) {
-            log.error(e.getMessage(), e);
+        } catch (JsonProcessingException e) {
+            throw new RuntimeException(e);
         }
-        return null;
     }
 
     @SneakyThrows
@@ -138,12 +141,22 @@ public class JsonUtil {
 
     public static ObjectMapper getInstance() {
         ObjectMapper instance = JacksonHolder.INSTANCE;
-        instance.registerModule(new JavaTimeModule());
+        instance.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+        instance.configure(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY, true);
+        instance.setSerializationInclusion(JsonInclude.Include.NON_NULL);
+        instance.registerModule(new XxJavaTimeModule());
+        instance.registerModule(simpleModule());
         return instance;
+    }
+
+    public static SimpleModule simpleModule() {
+        SimpleModule module = new SimpleModule();
+        module.addSerializer(Long.class, ToStringSerializer.instance);
+        module.addSerializer(BigDecimal.class, ToStringSerializer.instance);
+        return module;
     }
 
     private static class JacksonHolder {
         private static final ObjectMapper INSTANCE = new ObjectMapper();
     }
-
 }

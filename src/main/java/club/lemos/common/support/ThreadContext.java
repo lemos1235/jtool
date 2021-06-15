@@ -7,6 +7,7 @@ import lombok.extern.slf4j.Slf4j;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 
 /**
@@ -107,6 +108,22 @@ public class ThreadContext {
             log.trace(msg);
         }
         return value;
+    }
+
+    public static String getAsString(Object key) {
+        Object o = get(key);
+        if (Objects.isNull(o)) {
+            return null;
+        }
+        return get(key).toString();
+    }
+
+    public static Long getAsLong(Object key) {
+        Object o = get(key);
+        if (Objects.isNull(o)) {
+            return null;
+        }
+        return Long.parseLong(o.toString());
     }
 
     /**

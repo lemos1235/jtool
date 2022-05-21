@@ -36,7 +36,7 @@
         <maven.compiler.source>${java.version}</maven.compiler.source>
         <maven.compiler.target>${java.version}</maven.compiler.target>
         <encoding>UTF-8</encoding>
-        <spring.boot.version>2.5.1</spring.boot.version>
+        <spring.boot.version>2.5.12</spring.boot.version>
         <lombok.version>1.18.20</lombok.version>
         <mybatis-plus.version>3.4.3</mybatis-plus.version>
         <swagger.version>3.0.0</swagger.version>

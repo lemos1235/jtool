@@ -365,6 +365,29 @@ public class StringUtil extends org.springframework.util.StringUtils {
                 .map(Long::parseLong).collect(Collectors.toList());
     }
 
+    public static List<Integer> idsToIntList(String ids) {
+        return idsToIntList(ids, ",");
+    }
+
+    public static List<Integer> idsToIntList(String ids, String separator) {
+        if (StringUtil.isBlank(ids)) {
+            return null;
+        }
+        return Arrays.stream(ids.split(separator))
+                .map(Integer::parseInt).collect(Collectors.toList());
+    }
+
+    public static List<String> idsToStrList(String ids) {
+        return idsToStrList(ids, ",");
+    }
+
+    public static List<String> idsToStrList(String ids, String separator) {
+        if (StringUtil.isBlank(ids)) {
+            return null;
+        }
+        return Arrays.stream(ids.split(separator)).collect(Collectors.toList());
+    }
+
 // ---------------------------------------------------------------- starts and ends
 
     /**

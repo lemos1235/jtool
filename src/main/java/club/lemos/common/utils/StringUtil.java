@@ -253,7 +253,7 @@ public class StringUtil extends org.springframework.util.StringUtils {
      * @return 切掉后的字符串，若后缀不是 suffix， 返回原字符串
      */
     public static String removeSuffix(CharSequence str, CharSequence suffix) {
-        if (hasLength(str) || hasLength(suffix)) {
+        if (!hasLength(str) || !hasLength(suffix)) {
             return "";
         }
         final String str2 = str.toString();
@@ -317,7 +317,7 @@ public class StringUtil extends org.springframework.util.StringUtils {
      * @return 字串
      */
     public static String sub(CharSequence str, int fromIndex, int toIndex) {
-        if (hasLength(str)) {
+        if (!hasLength(str)) {
             return "";
         }
         int len = str.length();

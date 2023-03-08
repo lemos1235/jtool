@@ -271,8 +271,8 @@ public class StringUtil extends org.springframework.util.StringUtils {
      * @return 切割后后剩余的后半部分字符串
      */
     public static String subSuf(CharSequence string, int fromIndex) {
-        if (hasLength(string)) {
-            return null;
+        if (!hasLength(string)) {
+            return "";
         }
         return sub(string, fromIndex, string.length());
     }

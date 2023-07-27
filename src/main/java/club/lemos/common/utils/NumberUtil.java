@@ -149,6 +149,36 @@ public class NumberUtil extends NumberUtils {
         return defaultValue;
     }
 
+    public static String encodeNumberToS(char[] digits, long i) {
+        int radix = digits.length;
+        char[] buf = new char[65];
+        int charPos = 64;
+        i = -i;
+        while (i <= -radix) {
+            buf[charPos--] = digits[(int) (-(i % radix))];
+            i = i / radix;
+        }
+        buf[charPos] = digits[(int) (-i)];
+        return new String(buf, charPos, (65 - charPos));
+    }
+
+    public static long decodeSToNumber(char[] digits, String str) {
+        int radix = digits.length;
+        long result = 0;
+        for (int i = 0; i < str.length(); i++) {
+            char c = str.charAt(i);
+            int digitValue = 0;
+            for (int j = 0; j < radix; j++) {
+                if (c == digits[j]) {
+                    digitValue = j;
+                    break;
+                }
+            }
+            result = result * radix + digitValue;
+        }
+        return result;
+    }
+
     /**
      * All possible chars for representing a number as a String
      */
@@ -160,29 +190,6 @@ public class NumberUtil extends NumberUtils {
             'o', 'p', 'q', 'r', 's', 't',
             'u', 'v', 'w', 'x', 'y', 'z'
     };
-
-    /**
-     * 将 long 转短字符串 为 36 进制
-     *
-     * @param i 数字
-     * @return 短字符串
-     */
-    public static String encode10To36(long i) {
-        StringBuilder sb = new StringBuilder();
-        int remainder;
-        // 进制转换比率
-        int SCALE = LOWER_DIGITS.length;
-        // 初始化 36 进制数据，索引位置代表转换字符的数值 0-35，比如 a代表10，z代表35
-        while (Math.abs(i) > SCALE - 1) {
-            //从最后一位开始进制转换，取转换后的值，最后反转字符串
-            remainder = Long.valueOf(i % SCALE).intValue();
-            sb.append(LOWER_DIGITS[remainder]);
-            i = i / SCALE;
-        }
-        //获取最高位
-        sb.append(LOWER_DIGITS[(Long.valueOf(i).intValue())]);
-        return sb.reverse().toString();
-    }
 
     /**
      * All possible chars for representing a number as a String
@@ -202,22 +209,42 @@ public class NumberUtil extends NumberUtils {
     };
 
     /**
-     * 将 long 转短字符串 为 62 进制
+     * 10 进制编码成 36 进制
      *
      * @param i 数字
      * @return 短字符串
      */
-    public static String to62String(long i) {
-        int radix = DIGITS.length;
-        char[] buf = new char[65];
-        int charPos = 64;
-        i = -i;
-        while (i <= -radix) {
-            buf[charPos--] = DIGITS[(int) (-(i % radix))];
-            i = i / radix;
-        }
-        buf[charPos] = DIGITS[(int) (-i)];
+    public static String encode10To36(long i) {
+        return encodeNumberToS(LOWER_DIGITS, i);
+    }
 
-        return new String(buf, charPos, (65 - charPos));
+    /**
+     * 36 进制解码成 10 进制
+     *
+     * @param str 短字符串
+     * @return 数字
+     */
+    public static long decode36To10(String str) {
+        return decodeSToNumber(LOWER_DIGITS, str);
+    }
+
+    /**
+     * 10 进制编码成 62 进制
+     *
+     * @param i 数字
+     * @return 短字符串
+     */
+    public static String encode10To62(long i) {
+        return encodeNumberToS(DIGITS, i);
+    }
+
+    /**
+     * 62 进制解码成 10 进制
+     *
+     * @param str 短字符串
+     * @return 数字
+     */
+    public static long decode62To10(String str) {
+        return decodeSToNumber(DIGITS, str);
     }
 }

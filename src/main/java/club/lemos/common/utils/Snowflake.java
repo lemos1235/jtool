@@ -1,25 +1,25 @@
 package club.lemos.common.utils;
 
-import lombok.extern.slf4j.Slf4j;
-
 import java.net.InetAddress;
 import java.util.concurrent.ThreadLocalRandom;
 
-@Slf4j
 public final class Snowflake {
 
     /**
      * 起始时间戳
      **/
     private final static long START_TIME = 1519740777809L;
+
     /**
      * dataCenterId占用的位数：2
      **/
     private final static long DATA_CENTER_ID_BITS = 2L;
+
     /**
      * workerId占用的位数：8
      **/
     private final static long WORKER_ID_BITS = 8L;
+
     /**
      * 序列号占用的位数：12（表示只允许workId的范围为：0-4095）
      **/
@@ -29,6 +29,7 @@ public final class Snowflake {
      * workerId可以使用范围：0-255
      **/
     private final static long MAX_WORKER_ID = ~(-1L << WORKER_ID_BITS);
+
     /**
      * dataCenterId可以使用范围：0-3
      **/
@@ -56,7 +57,7 @@ public final class Snowflake {
 
     public Snowflake(long dataCenterId) {
         this(dataCenterId, 0x000000FF & getLastIPAddress(), false, 5L, false);
-        log.debug("Snowflake Current Machine WorkerId {}", 0x000000FF & getLastIPAddress());
+        System.out.printf("Snowflake Current Machine WorkerId %d%n", 0x000000FF & getLastIPAddress());
     }
 
     public Snowflake(long dataCenterId, boolean clock, boolean randomSequence) {

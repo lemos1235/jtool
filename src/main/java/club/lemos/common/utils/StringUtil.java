@@ -214,10 +214,10 @@ public class StringUtil extends org.springframework.util.StringUtils {
      *
      * @param str    字符串
      * @param prefix 前缀
-     * @return 切掉后的字符串，若前缀不是 preffix， 返回原字符串
+     * @return 切掉后的字符串，若前缀不是 prefix， 返回原字符串
      */
     public static String removePrefix(CharSequence str, CharSequence prefix) {
-        if (hasLength(str) || hasLength(prefix)) {
+        if (!hasLength(str) || !hasLength(prefix)) {
             return StringPool.EMPTY;
         }
         final String str2 = str.toString();
@@ -235,7 +235,7 @@ public class StringUtil extends org.springframework.util.StringUtils {
      * @return 切掉后的字符串，若前缀不是 prefix， 返回原字符串
      */
     public static String removePrefixIgnoreCase(CharSequence str, CharSequence prefix) {
-        if (hasLength(str) || hasLength(prefix)) {
+        if (!hasLength(str) || !hasLength(prefix)) {
             return StringPool.EMPTY;
         }
         final String str2 = str.toString();
@@ -254,7 +254,7 @@ public class StringUtil extends org.springframework.util.StringUtils {
      */
     public static String removeSuffix(CharSequence str, CharSequence suffix) {
         if (!hasLength(str) || !hasLength(suffix)) {
-            return "";
+            return StringPool.EMPTY;
         }
         final String str2 = str.toString();
         if (str2.endsWith(suffix.toString())) {
@@ -272,7 +272,7 @@ public class StringUtil extends org.springframework.util.StringUtils {
      */
     public static String subSuf(CharSequence string, int fromIndex) {
         if (!hasLength(string)) {
-            return "";
+            return StringPool.EMPTY;
         }
         return sub(string, fromIndex, string.length());
     }
@@ -318,7 +318,7 @@ public class StringUtil extends org.springframework.util.StringUtils {
      */
     public static String sub(CharSequence str, int fromIndex, int toIndex) {
         if (!hasLength(str)) {
-            return "";
+            return StringPool.EMPTY;
         }
         int len = str.length();
 

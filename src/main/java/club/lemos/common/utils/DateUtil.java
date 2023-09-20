@@ -517,6 +517,16 @@ public class DateUtil {
     }
 
     /**
+     * 转换成java8 时间
+     *
+     * @param seconds 秒数
+     * @return LocalDateTime
+     */
+    public static LocalDateTime fromSeconds(final long seconds) {
+        return LocalDateTime.ofInstant(Instant.ofEpochMilli(seconds * 1000), ZoneId.systemDefault());
+    }
+
+    /**
      * 比较2个时间差，跨度比较小
      *
      * @param startInclusive 开始时间

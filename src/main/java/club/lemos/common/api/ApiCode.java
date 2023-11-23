@@ -1,6 +1,7 @@
 package club.lemos.common.api;
 
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 /**
  * Api错误码
@@ -10,7 +11,8 @@ import lombok.Data;
  * B:项目或模块名称
  * C:具体错误编号
  */
-@Data
+@Getter
+@Setter
 public class ApiCode implements IResultCode {
 
     private static final long serialVersionUID = 1L;

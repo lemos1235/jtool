@@ -1,22 +1,22 @@
 package club.lemos.common.node;
 
-import lombok.Data;
-import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.io.Serializable;
 
 /**
  * 树型节点类
  */
-@Data
-@EqualsAndHashCode(callSuper = false)
+@Getter
+@Setter
 public class TreeNode extends BaseNode implements Serializable {
 
-	private String title;
+    private String title;
 
-	private Long key;
+    private Long key;
 
-	private Long value;
+    private Long value;
 
-	private Integer type;
+    private Integer type;
 }

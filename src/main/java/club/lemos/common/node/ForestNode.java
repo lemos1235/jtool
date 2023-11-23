@@ -1,25 +1,25 @@
 package club.lemos.common.node;
 
-import lombok.Data;
-import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
 
 
 /**
  * 森林节点类
  */
-@Data
-@EqualsAndHashCode(callSuper = false)
+@Getter
+@Setter
 public class ForestNode extends BaseNode {
 
-	/**
-	 * 节点内容
-	 */
-	private Object content;
+    /**
+     * 节点内容
+     */
+    private Object content;
 
-	public ForestNode(Long id, Long parentId, Object content) {
-		this.id = id;
-		this.parentId = parentId;
-		this.content = content;
-	}
+    public ForestNode(Long id, Long parentId, Object content) {
+        this.id = id;
+        this.parentId = parentId;
+        this.content = content;
+    }
 
 }

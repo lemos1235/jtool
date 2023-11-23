@@ -1,10 +1,10 @@
 package club.lemos.common.api;
 
-import lombok.Data;
-import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
 
-@EqualsAndHashCode(callSuper = true)
-@Data
+@Getter
+@Setter
 public class ApiException extends RuntimeException {
 
     /**
@@ -22,9 +22,8 @@ public class ApiException extends RuntimeException {
     private String errorDescription;
 
     /**
-     * @deprecated 请使用 ApiException(IResultCode resultCode)
-     *
      * @param msg 错误信息
+     * @deprecated 请使用 ApiException(IResultCode resultCode)
      */
     @Deprecated
     public ApiException(String msg) {

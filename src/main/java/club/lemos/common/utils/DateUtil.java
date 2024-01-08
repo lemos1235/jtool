@@ -465,13 +465,13 @@ public class DateUtil {
     }
 
     /**
-     * localDate 转换成毫秒数
+     * localDateTime 转换成秒数
      *
-     * @param localDate LocalDate
+     * @param localDateTime LocalDateTime
      * @return long
      */
-    public static long toMilliseconds(LocalDate localDate) {
-        return toMilliseconds(localDate.atStartOfDay());
+    public static long toSeconds(final LocalDateTime localDateTime) {
+        return localDateTime.atZone(ZoneId.systemDefault()).toInstant().toEpochMilli() / 1000;
     }
 
     /**

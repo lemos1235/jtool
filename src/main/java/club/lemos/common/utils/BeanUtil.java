@@ -25,10 +25,10 @@ public class BeanUtil extends BeanUtils {
 
     /**
      * 拷贝对象
-     *
+     * <p>
      * 注意：不支持链式Bean，链式用 copyProperties
      *
-     * @param source 源对象
+     * @param source     源对象
      * @param targetBean 需要赋值的对象
      */
     public static void deepCopy(Object source, Object targetBean) {
@@ -75,10 +75,30 @@ public class BeanUtil extends BeanUtils {
         final BeanWrapper src = new BeanWrapperImpl(source);
         PropertyDescriptor[] pds = src.getPropertyDescriptors();
 
+        Set<String> nullNames = new HashSet<>();
+        for (PropertyDescriptor pd : pds) {
+            Object srcValue = src.getPropertyValue(pd.getName());
+            if (srcValue == null) {
+                nullNames.add(pd.getName());
+            }
+        }
+        String[] result = new String[nullNames.size()];
+        return nullNames.toArray(result);
+    }
+
+    /**
+     * exclude empty property
+     *
+     * @param source source
+     * @return ignoreProperties
+     */
+    public static String[] getEmptyPropertyNames(Object source) {
+        final BeanWrapper src = new BeanWrapperImpl(source);
+        PropertyDescriptor[] pds = src.getPropertyDescriptors();
+
         Set<String> emptyNames = new HashSet<>();
         for (PropertyDescriptor pd : pds) {
             Object srcValue = src.getPropertyValue(pd.getName());
-
             if (srcValue == null) {
                 emptyNames.add(pd.getName());
             } else if (srcValue instanceof String) {

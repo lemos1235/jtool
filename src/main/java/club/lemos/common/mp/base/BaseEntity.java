@@ -18,5 +18,4 @@ public class BaseEntity implements Serializable {
      */
     @TableId(value = "id", type = IdType.AUTO)
     private Long id;
-
 }

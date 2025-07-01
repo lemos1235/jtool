@@ -13,7 +13,7 @@ public interface CommonConstant {
     int DB_IS_DELETED = 1;
     int DB_ADMIN_NON_LOCKED = 0;
     int DB_ADMIN_LOCKED = 1;
-    int DB_DISABlED = 0;
+    int DB_DISABLED = 0;
     int DB_ENABlED = 1;
 
     /**
@@ -41,19 +41,21 @@ public interface CommonConstant {
     /**
      * 数据库相关
      */
-    String DB_CREATE_TIME_FIELD_NAME ="createTime";
-    String DB_UPDATE_TIME_FIELD_NAME ="updateTime";
-    String DB_IS_DELETED_FIELD_NAME ="isDeleted";
-    String DB_ENABLED_FIELD_NAME ="enabled";
-    String DATETIME_MIN ="1000-01-01T00:00:00";
-    String DATETIME_MAX ="9999-12-31T23:59:59";
+    String DB_CREATE_TIME_FIELD_NAME = "createTime";
+    String DB_UPDATE_TIME_FIELD_NAME = "updateTime";
+    String DB_CREATED_AT_FIELD_NAME = "createdAt";
+    String DB_UPDATED_AT_FIELD_NAME = "updatedAt";
+    String DB_IS_DELETED_FIELD_NAME = "isDeleted";
+    String DB_ENABLED_FIELD_NAME = "enabled";
+    String DATETIME_MIN = "1000-01-01T00:00:00";
+    String DATETIME_MAX = "9999-12-31T23:59:59";
 
-    String DB_CREATE_USER_COLUMN_NAME ="create_user";
-    String DB_CREATE_TIME_COLUMN_NAME ="create_time";
-    String DB_UPDATE_USER_COLUMN_NAME ="update_user";
-    String DB_UPDATE_TIME_COLUMN_NAME ="update_time";
-    String DB_IS_DELETED_COLUMN_NAME ="is_deleted";
-    String DB_ENABLED_COLUMN_NAME ="enabled";
+    String DB_CREATE_TIME_COLUMN_NAME = "create_time";
+    String DB_UPDATE_TIME_COLUMN_NAME = "update_time";
+    String DB_CREATED_AT_COLUMN_NAME = "created_at";
+    String DB_UPDATED_AT_COLUMN_NAME = "updated_at";
+    String DB_IS_DELETED_COLUMN_NAME = "is_deleted";
+    String DB_ENABLED_COLUMN_NAME = "enabled";
 
     String DB_TENANT_ID = "tenant_id";
 }

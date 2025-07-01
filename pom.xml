@@ -6,7 +6,7 @@
 
     <groupId>club.lemos</groupId>
     <artifactId>jtool</artifactId>
-    <version>1.1.8</version>
+    <version>1.1.9</version>
     <packaging>jar</packaging>
     <name>jtool</name>
 
@@ -15,7 +15,7 @@
     <licenses>
         <license>
             <name>Apache License, Version 2.0</name>
-            <url>http://www.apache.org/licenses/LICENSE-2.0</url>
+            <url>https://www.apache.org/licenses/LICENSE-2.0</url>
             <distribution>repo</distribution>
         </license>
     </licenses>
@@ -36,10 +36,9 @@
         <maven.compiler.source>${java.version}</maven.compiler.source>
         <maven.compiler.target>${java.version}</maven.compiler.target>
         <encoding>UTF-8</encoding>
-        <spring.boot.version>2.7.8</spring.boot.version>
+        <spring.boot.version>2.7.18</spring.boot.version>
         <lombok.version>1.18.24</lombok.version>
-        <mybatis-plus.version>3.4.3</mybatis-plus.version>
-        <swagger.version>3.0.0</swagger.version>
+        <mybatis-plus.version>3.5.11</mybatis-plus.version>
         <maven.compiler.version>3.8.0</maven.compiler.version>
         <maven.surefire.version>2.22.1</maven.surefire.version>
         <maven.source.version>3.2.0</maven.source.version>
@@ -96,17 +95,7 @@
 
     <profiles>
         <profile>
-            <id>github</id>
-            <distributionManagement>
-                <repository>
-                    <id>github</id>
-                    <name>GitHub OWNER Apache Maven Packages</name>
-                    <url>https://maven.pkg.github.com/lemos1235/jtool</url>
-                </repository>
-            </distributionManagement>
-        </profile>
-        <profile>
-            <id>oss</id>
+            <id>release</id>
             <activation>
                 <activeByDefault>true</activeByDefault>
             </activation>
@@ -164,28 +153,17 @@
                         </executions>
                     </plugin>
                     <plugin>
-                        <groupId>org.sonatype.plugins</groupId>
-                        <artifactId>nexus-staging-maven-plugin</artifactId>
-                        <version>${maven.staging.version}</version>
+                        <groupId>org.sonatype.central</groupId>
+                        <artifactId>central-publishing-maven-plugin</artifactId>
+                        <version>0.8.0</version>
                         <extensions>true</extensions>
                         <configuration>
-                            <serverId>oss</serverId>
-                            <nexusUrl>https://oss.sonatype.org/</nexusUrl>
-                            <autoReleaseAfterClose>true</autoReleaseAfterClose>
+                            <publishingServerId>central</publishingServerId>
                         </configuration>
                     </plugin>
                 </plugins>
             </build>
-            <distributionManagement>
-                <snapshotRepository>
-                    <id>oss</id>
-                    <url>https://oss.sonatype.org/content/repositories/snapshots/</url>
-                </snapshotRepository>
-                <repository>
-                    <id>oss</id>
-                    <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
-                </repository>
-            </distributionManagement>
         </profile>
     </profiles>
+
 </project>

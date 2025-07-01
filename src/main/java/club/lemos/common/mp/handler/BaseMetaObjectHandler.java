@@ -17,6 +17,8 @@ public class BaseMetaObjectHandler implements MetaObjectHandler {
         LocalDateTime now = LocalDateTime.now();
         this.strictInsertFill(metaObject, CommonConstant.DB_CREATE_TIME_FIELD_NAME, LocalDateTime.class, now);
         this.strictInsertFill(metaObject, CommonConstant.DB_UPDATE_TIME_FIELD_NAME, LocalDateTime.class, now);
+        this.strictInsertFill(metaObject, CommonConstant.DB_CREATED_AT_FIELD_NAME, LocalDateTime.class, now);
+        this.strictInsertFill(metaObject, CommonConstant.DB_UPDATED_AT_FIELD_NAME, LocalDateTime.class, now);
         this.strictInsertFill(metaObject, CommonConstant.DB_ENABLED_FIELD_NAME, Integer.class, 1);
         this.strictInsertFill(metaObject, CommonConstant.DB_ENABLED_FIELD_NAME, Boolean.class, true);
         this.strictInsertFill(metaObject, CommonConstant.DB_IS_DELETED_FIELD_NAME, Integer.class, CommonConstant.DB_NOT_DELETED);
@@ -26,6 +28,7 @@ public class BaseMetaObjectHandler implements MetaObjectHandler {
     public void updateFill(MetaObject metaObject) {
         log.debug("start update fill ....");
         this.strictUpdateFill(metaObject, CommonConstant.DB_UPDATE_TIME_FIELD_NAME, LocalDateTime.class, LocalDateTime.now());
+        this.strictUpdateFill(metaObject, CommonConstant.DB_UPDATED_AT_FIELD_NAME, LocalDateTime.class, LocalDateTime.now());
     }
 
 }
